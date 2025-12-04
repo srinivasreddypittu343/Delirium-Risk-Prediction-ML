@@ -46,70 +46,110 @@ machine learning course**, not for clinical use.
 └── src/
     └── delirium_pipeline.py         # clean, runnable script
 ```
----
 
-3. Dataset
+📊 3. Dataset
 
-The original dataset (delirium_ml.xlsx) contains >200 elderly surgical / hip-fracture
-patients, with:
+The project uses an anonymised delirium dataset of elderly surgical / hip-fracture patients.
 
-Demographics – Age, Height, BMI
+Each row = one patient
+Each column = a clinical feature
 
-Frailty – Frailty Index
+Main columns:
 
-Labs – haematocrit (Hct), albumin (Alb), creatinine (Cre), etc.
+🧍‍♂️ Demographics
 
-Peri-operative variables – duration of anaesthesia / surgery, ICU admission,
-infusions, blood products, post-operative length of stay
+Age, Height, BMI
 
-Target label – Postop Delirium (0 = no, 1 = yes)
+💪 Frailty
 
-For this repository, data/delirium_ml_sample.xlsx contains a small, de-identified
-sample with the same schema.
-To reproduce all results, replace it with the full dataset if you are allowed to use it.
+Frailty Index
 
-4. Methods
-4.1 Pre-processing
+🧪 Laboratory values
 
-Convert text-encoded numeric columns (e.g. LOS, Hct, Alb, Cre) to numeric
+Hct (haematocrit)
 
-Median imputation for missing numeric values
+Alb (albumin)
 
-Drop patient identifier column
+Cre (creatinine)
 
-Define X (features) and y (Postop Delirium)
+(plus other routine labs)
 
-Stratified 80/20 train–test split
+🏥 Peri-operative data
 
-StandardScaler for models that need scaling (LR, SVM, MLP)
+DuraAnes – duration of anaesthesia
 
-4.2 Models
+DuraSurg – duration of surgery
 
-All models are implemented with scikit-learn:
+ICU – ICU admission (0/1)
+
+Infusion, FFP, Vasopressor, Postop LOS, etc.
+
+🎯 Target label
+
+Postop Delirium → 0 = no, 1 = yes
+
+Delirium is the minority class → imbalanced classification
+
+For sharing in this repo, data/delirium_ml_sample.xlsx contains a small, de-identified subset with the same schema.
+If you have permission, you can swap in the full dataset locally.
+
+🛠 4. Methods
+4.1 Pre-processing pipeline
+
+Key steps before modelling:
+
+🔢 Convert text-encoded numeric columns (e.g. LOS, Hct, Alb, Cre) → proper numeric
+
+🕳 Handle missing values with median imputation
+
+🆔 Drop any ID columns (SN, ID, etc.) to avoid leakage
+
+📦 Define:
+
+X – all feature columns
+
+y – Postop Delirium
+
+✂️ Split data with stratified 80/20 train–test split
+
+📏 Apply StandardScaler for models that require scaling (LR, SVM, MLP)
+
+4.2 Models (all in scikit-learn)
 
 Logistic Regression
 
-Linear baseline, class_weight="balanced"
+Linear baseline, interpretable coefficients
+
+Uses class_weight="balanced" to handle class imbalance
 
 Random Forest
 
-Ensemble of decision trees, used for feature importance and the interface
+Ensemble of decision trees
 
-SVM (RBF)
+Captures non-linear interactions
 
-Non-linear margin-based classifier on scaled features
+Provides feature importances (used for key risk factors and interface)
 
-Multi-Layer Perceptron (MLP)
+SVM (RBF kernel)
 
-Small feed-forward neural network with two hidden layers and early stopping
+Margin-based classifier with a non-linear RBF kernel
 
-4.3 Evaluation
+Trained on scaled features
 
-Main metric: ROC AUC (test set)
+MLP Neural Network
 
-Additional metrics: precision, recall, F1-score, confusion matrix
+Small feed-forward network (2 hidden layers, ReLU, early stopping)
 
-Focus on recall for the delirium class (1) – missing high-risk patients is costly
+Learns more complex non-linear relations
+
+4.3 Evaluation metrics
+
+⭐ Primary metric: ROC AUC on the test set
+
+📉 Also report: precision, recall, F1-score, confusion matrix
+
+🩺 Clinical focus: recall for delirium = 1
+→ missing high-risk patients is more serious than a few extra false positives
 
 Approximate test ROC AUC:
 
@@ -118,48 +158,77 @@ Logistic Regression	~0.78
 Random Forest	~0.60
 SVM (RBF)	~0.69
 MLP Neural Network	~0.80 (best)
-5. Unsupervised Analysis: PCA & Clustering
+🔍 5. Unsupervised Analysis – PCA & Clustering
 
-To explore patient phenotypes:
+To understand the structure of the patient cohort, the project also uses unsupervised methods:
 
-PCA on scaled features
+5.1 PCA (Principal Component Analysis)
 
-PC1 ≈ 14.2% variance
+Apply PCA to the scaled features
 
-PC2 ≈ 8.6% variance
+PC1 explains ≈ 14.2% of variance
+
+PC2 explains ≈ 8.6% of variance
+
+Together ≈ 23% of total variance
 
 Plot patients in PC1–PC2 space, coloured by delirium outcome
+→ certain regions contain more delirium cases → potential high-risk zones
 
-Apply K-Means (k = 3) in PCA space
+5.2 K-Means clustering (k = 3)
 
-Resulting clusters (approx.):
+Run K-Means (k = 3) in the PCA space
+
+Clusters (approximate values):
 
 Cluster sizes: 109, 30, 57 patients
 
 Delirium rates: 6.4%, 33.3%, 12.3%
 
-One cluster clearly shows a much higher delirium rate, suggesting a high-risk
-patient phenotype.
+Interpretation:
 
-6. Patient-Level Risk Interface
+One cluster clearly has a much higher delirium rate
 
-The delirium_pipeline.py script and notebook implement a simple interface:
+Acts as a high-risk phenotype – a subgroup of patients who are significantly more likely to develop delirium
 
-Build a template patient from median feature values.
+This unsupervised view supports the supervised models by showing that high-risk groups emerge naturally from the data.
 
-Override key fields via a Python dict (Age, Frailty, ICU, Hct, Alb, Cre, …).
+🧑‍⚕️ 6. Patient-Level Risk Interface
+
+The repository also contains a small patient-level interface built around the trained Random Forest.
+
+6.1 How it works
+
+Build a template patient using the median value of each feature from the training data.
+
+Accept a Python dict of overrides (e.g. Age, Frailty Index, ICU, Hct, Alb, Cre).
+
+Construct a one-row DataFrame in the same column order as training.
 
 Use the Random Forest to predict:
 
-class (0/1)
+class label (0 / 1)
 
-probability of delirium
+probability of delirium (0–1)
 
-Map the probability to:
+Convert the probability into a simple interpretation:
 
-< 0.5 → LOW chance of post-operative delirium
+p < 0.5 → “LOW chance of post-operative delirium”
 
-≥ 0.5 → HIGH risk – consider closer monitoring
+p ≥ 0.5 → “HIGH risk – consider closer monitoring”
 
-This turns a complex model into a single, intuitive output that clinicians can
-understand at a glance.
+6.2 Why it’s useful
+
+Hides model complexity behind a single, intuitive output
+
+Uses variables that are already present in hospital systems (age, frailty, labs, ICU)
+
+Easy to extend into:
+
+a Streamlit app
+
+or an EHR-integrated risk widget in future work
+
+This interface shows how a research model can be turned into something that is clinician-friendly and actionable, while still being fully transparent in the code.
+---
+
