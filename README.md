@@ -164,6 +164,7 @@ Together ≈ 23% of total variance
 
 Plot patients in PC1–PC2 space, coloured by delirium outcome
 → certain regions contain more delirium cases → potential high-risk zones
+<img width="578" height="480" alt="image" src="https://github.com/user-attachments/assets/035be79c-3536-43b1-b83b-25b5210776c9" />
 
 4.2 K-Means clustering (k = 3)
 
@@ -174,6 +175,7 @@ Clusters (approximate values):
 Cluster sizes: 109, 30, 57 patients
 
 Delirium rates: 6.4%, 33.3%, 12.3%
+<img width="572" height="475" alt="image" src="https://github.com/user-attachments/assets/8af82463-38dc-4ba0-8d9d-1a8655c6f14d" />
 
 Interpretation:
 
