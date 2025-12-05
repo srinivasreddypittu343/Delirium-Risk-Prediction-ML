@@ -47,7 +47,7 @@ machine learning course**, not for clinical use.
     └── delirium_pipeline.py         # clean, runnable script
 ```
 
-📊 3. Dataset
+## 📊 3. Dataset
 
 The project uses an anonymised delirium dataset of elderly surgical / hip-fracture patients.
 
@@ -93,7 +93,7 @@ Delirium is the minority class → imbalanced classification
 For sharing in this repo, data/delirium_ml_sample.xlsx contains a small, de-identified subset with the same schema.
 If you have permission, you can swap in the full dataset locally.
 
-🛠 4. Methods
+## 🛠 4. Methods
 4.1 Pre-processing pipeline
 
 Key steps before modelling:
@@ -158,7 +158,7 @@ Logistic Regression	~0.78
 Random Forest	~0.60
 SVM (RBF)	~0.69
 MLP Neural Network	~0.80 (best)
-🔍 5. Unsupervised Analysis – PCA & Clustering
+## 🔍 5. Unsupervised Analysis – PCA & Clustering
 
 To understand the structure of the patient cohort, the project also uses unsupervised methods:
 
@@ -193,7 +193,7 @@ Acts as a high-risk phenotype – a subgroup of patients who are significantly m
 
 This unsupervised view supports the supervised models by showing that high-risk groups emerge naturally from the data.
 
-🧑‍⚕️ 6. Patient-Level Risk Interface
+## 🧑‍⚕️ 6. Patient-Level Risk Interface
 
 The repository also contains a small patient-level interface built around the trained Random Forest.
 
