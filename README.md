@@ -176,6 +176,7 @@ Together ≈ 23% of total variance
 
 Plot patients in PC1–PC2 space, coloured by delirium outcome
 → certain regions contain more delirium cases → potential high-risk zones
+
 <img width="578" height="480" alt="image" src="https://github.com/user-attachments/assets/035be79c-3536-43b1-b83b-25b5210776c9" />
 
 4.2 K-Means clustering (k = 3)
