@@ -175,7 +175,6 @@ Clusters (approximate values):
 Cluster sizes: 109, 30, 57 patients
 
 Delirium rates: 6.4%, 33.3%, 12.3%
-
 <img width="572" height="475" alt="image" src="https://github.com/user-attachments/assets/8af82463-38dc-4ba0-8d9d-1a8655c6f14d" />
 
 
