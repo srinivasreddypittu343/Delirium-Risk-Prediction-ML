@@ -228,6 +228,70 @@ Easy to extend into:
 
 a Streamlit app or an EHR-integrated risk widget in future work
 
-This interface shows how a research model can be turned into something that is clinician-friendly and actionable, while still being fully transparent in the code.
+## 6. Experiments and Results
+
+6.1 Model Performance (ROC AUC)
+
+Using the 20% test set (49 patients), the models achieved the following ROC AUC scores:
+
+**→** Logistic Regression: AUC ≈ 0.779
+
+**→** Random Forest: AUC ≈ 0.597
+
+**→** SVM (RBF): AUC ≈ 0.694
+
+**→** MLP Neural Network: AUC ≈ 0.802
+
+6.2 Confusion Matrices and Class Behaviour
+
+At the default classification threshold of 0.5, confusion matrices were computed on the test set.
+
+For Logistic Regression:
+**→** True Negatives (TN): 34
+**→** False Positives (FP): 9
+**→** False Negatives (FN): 1
+**→** True Positives (TP): 5
+
+This means Logistic Regression correctly identified 5 out of 6 delirium patients (high recall for class 1) but also produced some false alarms.
+
+For Random Forest, SVM, and MLP, the confusion matrices showed that, at the 0.5 threshold on this small test set, they predicted almost all patients as non-delirium. As a result, they achieved good accuracy on the majority class but missed all positive cases (TP = 0, FN = 6). This behaviour reflects the strong class imbalance and the high default threshold. The ROC curves, however, show that if the threshold were lowered, these models could achieve better recall for delirium.
+
+The key lesson is that confusion matrices show model behaviour at a specific threshold, while ROC AUC shows potential performance across all possible thresholds.
+
+6.3 Patient-Level Predictions
+
+Using the Random Forest-based interface, I created example patient profiles by altering key features while keeping others at median values. For each example, the interface printed:
+**→** The input values for the fields changed.
+**→** The predicted class (0 or 1).
+**→** The predicted probability of delirium.
+**→** A simple interpretation (“Low chance” or “High risk”).
+By testing several scenarios, I observed that increasing age, frailty index, ICU admission, and abnormal lab values led to higher predicted probabilities. This behaviour matches clinical expectations and demonstrates that the model responds logically to changes in key inputs.
+
+<img width="720" height="81" alt="image" src="https://github.com/user-attachments/assets/6e60e93a-fce3-440e-acc6-d55e7b273492" />
+
+<img width="720" height="102" alt="image" src="https://github.com/user-attachments/assets/3e3b30ac-6fd2-4fbc-bc32-9a54b6bd8b71" />
+
+## 7. Limitations and Ethical Considerations
+
+This project is based on a small, single-hospital dataset, which limits how well the models can generalize to other settings. Some important clinical variables—such as medications, baseline cognitive status, environmental factors, and time-series vital signs—were not available, and delirium labels may be incomplete or inconsistently documented. Because hyperparameter tuning and cross-validation were limited, the results may be noisy, and the models have not been prospectively validated.
+
+From an ethical standpoint, these models are strictly research and educational prototypes, not clinical tools. They should not be used for real patient decision-making. Any real-world deployment would require much larger datasets, probability calibration, fairness and bias audits, regulatory review, and close collaboration with clinicians. Even with validation, such tools must support—not replace—clinical judgment.
+
+## 8. Future Work
+
+Future work includes collecting larger and richer datasets from multiple centres and incorporating additional clinical variables such as medication regimens and time-series vital signs. Systematic hyper-parameter tuning and k-fold cross-validation should be used to obtain more reliable performance estimates. Advanced methods such as gradient boosting models, including XGBoost or LightGBM, could be explored for potentially higher accuracy on tabular data.
+
+Another important direction is probability calibration using methods such as Platt scaling or isotonic regression, combined with calibration plots and Brier scores. On the application side, the Random Forest or a better-performing interpretable model could be wrapped in a web or Streamlit application and, in the long term, integrated into an electronic health record system. Finally, external validation studies and impact evaluations would be needed to determine whether using such a tool actually reduces delirium rates or improves patient outcomes.
+
+## 9. Conclusion
+
+This project applied classical machine learning methods to predict post-operative delirium in elderly surgical patients using routinely collected clinical data. After careful preprocessing and stratified splitting, four models were trained and evaluated. The Multi-Layer Perceptron neural network achieved the highest ROC AUC, while Logistic Regression provided a strong interpretable baseline. Random Forest feature importances and unsupervised clustering highlighted clinically meaningful risk factors and high-risk patient phenotypes.
+
+
+Although the models are not ready for clinical deployment, they show that even relatively simple algorithms can extract useful signals about delirium risk from standard hospital data. The project demonstrates how machine learning techniques from a master’s course can be translated into a healthcare context and lays a foundation for future, more advanced clinical decision-support tools aimed at reducing the burden of post-operative delirium.
+
+## References
+
+Zhao, Hong (2022), “Machine learning delirium ”, Mendeley Data, V1, doi: 10.17632/5sbrfcg5r7.1
 ---
 
