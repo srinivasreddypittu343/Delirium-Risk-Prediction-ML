@@ -193,35 +193,25 @@ The repository also contains a small patient-level interface built around the tr
 
 5.1 How it works
 
-Build a template patient using the median value of each feature from the training data.
-
-Accept a Python dict of overrides (e.g. Age, Frailty Index, ICU, Hct, Alb, Cre).
-
-Construct a one-row DataFrame in the same column order as training.
+**-->** Build a template patient using the median value of each feature from the training data.
+**-->** Accept a Python dict of overrides (e.g. Age, Frailty Index, ICU, Hct, Alb, Cre).
+**-->** Construct a one-row DataFrame in the same column order as training.
 
 Use the Random Forest to predict:
 
-class label (0 / 1)
-
-probability of delirium (0–1)
+class label (0 / 1), probability of delirium (0–1)
 
 Convert the probability into a simple interpretation:
 
-p < 0.5 → “LOW chance of post-operative delirium”
-
-p ≥ 0.5 → “HIGH risk – consider closer monitoring”
+p < 0.5 → “LOW chance of post-operative delirium” and p ≥ 0.5 → “HIGH risk – consider closer monitoring”
 
 5.2 Why it’s useful
 
-Hides model complexity behind a single, intuitive output
-
-Uses variables that are already present in hospital systems (age, frailty, labs, ICU)
+Hides model complexity behind a single, intuitive output. Uses variables that are already present in hospital systems (age, frailty, labs, ICU)
 
 Easy to extend into:
 
-a Streamlit app
-
-or an EHR-integrated risk widget in future work
+a Streamlit app or an EHR-integrated risk widget in future work
 
 This interface shows how a research model can be turned into something that is clinician-friendly and actionable, while still being fully transparent in the code.
 ---
