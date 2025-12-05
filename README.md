@@ -179,6 +179,7 @@ Plot patients in PC1–PC2 space, coloured by delirium outcome
 
 <img width="578" height="480" alt="image" src="https://github.com/user-attachments/assets/035be79c-3536-43b1-b83b-25b5210776c9" />
 
+
 4.2 K-Means clustering (k = 3)
 
 Run K-Means (k = 3) in the PCA space
@@ -286,7 +287,6 @@ Another important direction is probability calibration using methods such as Pla
 ## 9. Conclusion
 
 This project applied classical machine learning methods to predict post-operative delirium in elderly surgical patients using routinely collected clinical data. After careful preprocessing and stratified splitting, four models were trained and evaluated. The Multi-Layer Perceptron neural network achieved the highest ROC AUC, while Logistic Regression provided a strong interpretable baseline. Random Forest feature importances and unsupervised clustering highlighted clinically meaningful risk factors and high-risk patient phenotypes.
-
 
 Although the models are not ready for clinical deployment, they show that even relatively simple algorithms can extract useful signals about delirium risk from standard hospital data. The project demonstrates how machine learning techniques from a master’s course can be translated into a healthcare context and lays a foundation for future, more advanced clinical decision-support tools aimed at reducing the burden of post-operative delirium.
 
