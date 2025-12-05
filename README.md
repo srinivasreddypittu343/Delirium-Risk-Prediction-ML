@@ -80,8 +80,8 @@ Delirium is the minority class → imbalanced classification
 For sharing in this repo, data/delirium_ml_sample.xlsx contains a small, de-identified subset with the same schema.
 If you have permission, you can swap in the full dataset locally.
 
-## 🛠 4. Methods
-4.1 Pre-processing pipeline
+## 🛠 3. Methods
+3.1 Pre-processing pipeline
 
 Key steps before modelling:
 
@@ -101,7 +101,7 @@ y – Postop Delirium
 
 📏 Apply StandardScaler for models that require scaling (LR, SVM, MLP)
 
-4.2 Models (all in scikit-learn)
+3.2 Models (all in scikit-learn)
 
 📌 Logistic Regression
 
@@ -132,7 +132,7 @@ y – Postop Delirium
 <img width="456" height="743" alt="image" src="https://github.com/user-attachments/assets/6e364ba4-d3d5-4e8b-9143-f6801a29518c" />
 
 
-4.3 Evaluation metrics
+3.3 Evaluation metrics
 
 ⭐ Primary metric: ROC AUC on the test set
 
@@ -148,11 +148,11 @@ Logistic Regression	~0.78
 Random Forest	~0.60
 SVM (RBF)	~0.69
 MLP Neural Network	~0.80 (best)
-## 🔍 5. Unsupervised Analysis – PCA & Clustering
+## 🔍 4. Unsupervised Analysis – PCA & Clustering
 
 To understand the structure of the patient cohort, the project also uses unsupervised methods:
 
-5.1 PCA (Principal Component Analysis)
+4.1 PCA (Principal Component Analysis)
 
 Apply PCA to the scaled features
 
@@ -165,7 +165,7 @@ Together ≈ 23% of total variance
 Plot patients in PC1–PC2 space, coloured by delirium outcome
 → certain regions contain more delirium cases → potential high-risk zones
 
-5.2 K-Means clustering (k = 3)
+4.2 K-Means clustering (k = 3)
 
 Run K-Means (k = 3) in the PCA space
 
@@ -183,11 +183,11 @@ Acts as a high-risk phenotype – a subgroup of patients who are significantly m
 
 This unsupervised view supports the supervised models by showing that high-risk groups emerge naturally from the data.
 
-## 🧑‍⚕️ 6. Patient-Level Risk Interface
+## 🧑‍⚕️ 5. Patient-Level Risk Interface
 
 The repository also contains a small patient-level interface built around the trained Random Forest.
 
-6.1 How it works
+5.1 How it works
 
 Build a template patient using the median value of each feature from the training data.
 
@@ -207,7 +207,7 @@ p < 0.5 → “LOW chance of post-operative delirium”
 
 p ≥ 0.5 → “HIGH risk – consider closer monitoring”
 
-6.2 Why it’s useful
+5.2 Why it’s useful
 
 Hides model complexity behind a single, intuitive output
 
