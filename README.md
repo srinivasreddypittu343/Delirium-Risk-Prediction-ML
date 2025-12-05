@@ -32,22 +32,9 @@ machine learning course**, not for clinical use.
 
 ---
 
-## 2. Repository Structure
+## 📊 2. Dataset and Pre-Processing
 
-```text
-.
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── data/
-│   └── delirium_ml_sample.xlsx      # small sample of the original dataset
-├── notebooks/
-│   └── Delirium_Prediction.ipynb    # full exploratory notebook
-└── src/
-    └── delirium_pipeline.py         # clean, runnable script
-```
-
-## 📊 3. Dataset
+The dataset (stored in delirium_ml.xlsx) contains data for a little over 200 elderly surgical or hip-fracture patients. Each row represents a single patient encounter, and each column corresponds to a clinical variable. Examples of features include demographics such as age, height, and body mass index; frailty information such as a frailty index; pre- and post-operative laboratory results such as haematocrit, albumin, and creatinine; and peri-operative variables such as duration of anaesthesia, duration of surgery, ICU admission, use of vasopressors, infusions, and blood products, as well as post-operative length of stay. The target variable is Postop Delirium, encoded as zero if the patient did not develop delirium and one if the patient did. Delirium cases are less frequent than non-delirium cases, so this is an imbalanced binary classification problem.
 
 The project uses an anonymised delirium dataset of elderly surgical / hip-fracture patients.
 
