@@ -80,6 +80,8 @@ Delirium is the minority class → imbalanced classification
 For sharing in this repo, data/delirium_ml_sample.xlsx contains a small, de-identified subset with the same schema.
 If you have permission, you can swap in the full dataset locally.
 
+---
+
 ## 🛠 3. Methods
 3.1 Pre-processing pipeline
 
@@ -160,6 +162,9 @@ Logistic Regression	~0.78
 Random Forest	~0.60
 SVM (RBF)	~0.69
 MLP Neural Network	~0.80 (best)
+
+---
+
 ## 🔍 4. Unsupervised Analysis – PCA & Clustering
 
 To understand the structure of the patient cohort, the project also uses unsupervised methods:
@@ -201,6 +206,8 @@ Acts as a high-risk phenotype – a subgroup of patients who are significantly m
 
 This unsupervised view supports the supervised models by showing that high-risk groups emerge naturally from the data.
 
+---
+
 ## 🧑‍⚕️ 5. Patient-Level Risk Interface
 
 The repository also contains a small patient-level interface built around the trained Random Forest.
@@ -228,6 +235,8 @@ Hides model complexity behind a single, intuitive output. Uses variables that ar
 Easy to extend into:
 
 a Streamlit app or an EHR-integrated risk widget in future work
+
+---
 
 ## 6. Experiments and Results
 
@@ -272,11 +281,15 @@ By testing several scenarios, I observed that increasing age, frailty index, ICU
 
 <img width="720" height="102" alt="image" src="https://github.com/user-attachments/assets/3e3b30ac-6fd2-4fbc-bc32-9a54b6bd8b71" />
 
+---
+
 ## 7. Limitations and Ethical Considerations
 
 This project is based on a small, single-hospital dataset, which limits how well the models can generalize to other settings. Some important clinical variables—such as medications, baseline cognitive status, environmental factors, and time-series vital signs—were not available, and delirium labels may be incomplete or inconsistently documented. Because hyperparameter tuning and cross-validation were limited, the results may be noisy, and the models have not been prospectively validated.
 
 From an ethical standpoint, these models are strictly research and educational prototypes, not clinical tools. They should not be used for real patient decision-making. Any real-world deployment would require much larger datasets, probability calibration, fairness and bias audits, regulatory review, and close collaboration with clinicians. Even with validation, such tools must support—not replace—clinical judgment.
+
+---
 
 ## 8. Future Work
 
@@ -284,14 +297,19 @@ Future work includes collecting larger and richer datasets from multiple centres
 
 Another important direction is probability calibration using methods such as Platt scaling or isotonic regression, combined with calibration plots and Brier scores. On the application side, the Random Forest or a better-performing interpretable model could be wrapped in a web or Streamlit application and, in the long term, integrated into an electronic health record system. Finally, external validation studies and impact evaluations would be needed to determine whether using such a tool actually reduces delirium rates or improves patient outcomes.
 
+---
+
 ## 9. Conclusion
 
 This project applied classical machine learning methods to predict post-operative delirium in elderly surgical patients using routinely collected clinical data. After careful preprocessing and stratified splitting, four models were trained and evaluated. The Multi-Layer Perceptron neural network achieved the highest ROC AUC, while Logistic Regression provided a strong interpretable baseline. Random Forest feature importances and unsupervised clustering highlighted clinically meaningful risk factors and high-risk patient phenotypes.
 
 Although the models are not ready for clinical deployment, they show that even relatively simple algorithms can extract useful signals about delirium risk from standard hospital data. The project demonstrates how machine learning techniques from a master’s course can be translated into a healthcare context and lays a foundation for future, more advanced clinical decision-support tools aimed at reducing the burden of post-operative delirium.
 
+---
+
 ## References
 
 Zhao, Hong (2022), “Machine learning delirium ”, Mendeley Data, V1, doi: 10.17632/5sbrfcg5r7.1
+
 ---
 
