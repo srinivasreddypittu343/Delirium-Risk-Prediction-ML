@@ -103,31 +103,15 @@ y – Postop Delirium
 
 4.2 Models (all in scikit-learn)
 
-Logistic Regression
+📌 Logistic Regression
 
-Linear baseline, interpretable coefficients
+**-->** We used Logistic Regression as an interpretable baseline model to predict the probability of post-operative delirium.
+**-->** It was trained on the cleaned and standardized clinical features with class_weight="balanced" to handle the imbalanced target.
+**-->** This model achieved a strong ROC AUC and helped us understand which features increased or decreased delirium risk through its coefficients.
+<img width="416" height="301" alt="image" src="https://github.com/user-attachments/assets/f72c0a1f-a980-45bc-afdd-3092950c1849" />
+<img width="449" height="449" alt="image" src="https://github.com/user-attachments/assets/0e06e4e3-9895-4815-a381-c01219843072" />
 
-Uses class_weight="balanced" to handle class imbalance
 
-Random Forest
-
-Ensemble of decision trees
-
-Captures non-linear interactions
-
-Provides feature importances (used for key risk factors and interface)
-
-SVM (RBF kernel)
-
-Margin-based classifier with a non-linear RBF kernel
-
-Trained on scaled features
-
-MLP Neural Network
-
-Small feed-forward network (2 hidden layers, ReLU, early stopping)
-
-Learns more complex non-linear relations
 
 4.3 Evaluation metrics
 
