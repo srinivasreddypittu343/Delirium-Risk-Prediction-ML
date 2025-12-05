@@ -105,30 +105,30 @@ y – Postop Delirium
 
 📌 Logistic Regression
 
-**-->** We used Logistic Regression as an interpretable baseline model to predict the probability of post-operative delirium.
-**-->** It was trained on the cleaned and standardized clinical features with class_weight="balanced" to handle the imbalanced target.
-**-->** This model achieved a strong ROC AUC and helped us understand which features increased or decreased delirium risk through its coefficients. 
+**→** We used Logistic Regression as an interpretable baseline model to predict the probability of post-operative delirium.
+**→** It was trained on the cleaned and standardized clinical features with class_weight="balanced" to handle the imbalanced target.
+**→** This model achieved a strong ROC AUC and helped us understand which features increased or decreased delirium risk through its coefficients. 
 <img width="453" height="742" alt="image" src="https://github.com/user-attachments/assets/8dcfeedd-8ed4-44b3-8e46-b3ebe6b66ecb" />
 
 🌲 Random Forest
 
-**-->** Random Forest was used to capture non-linear relationships and interactions between clinical variables.
-**-->** It was trained on the same preprocessed dataset and evaluated on the 20% test set alongside the other models.
-**-->** Although its ROC AUC was lower, it provided useful feature importance scores that highlighted key risk factors like age, ICU admission, and abnormal lab values.
+**→** Random Forest was used to capture non-linear relationships and interactions between clinical variables.
+**→** It was trained on the same preprocessed dataset and evaluated on the 20% test set alongside the other models.
+**→** Although its ROC AUC was lower, it provided useful feature importance scores that highlighted key risk factors like age, ICU admission, and abnormal lab values.
 <img width="453" height="741" alt="image" src="https://github.com/user-attachments/assets/807b30ad-b09e-48fc-89d1-37767d9c2592" />
 
 📉 SVM with RBF Kernel
 
-**-->** The SVM with an RBF kernel was used to learn non-linear decision boundaries between delirium and non-delirium patients.
-**-->** We trained it on standardized features to ensure all variables were on a similar scale.
-**-->** Its ROC AUC was moderate, and the confusion matrix showed that at the default threshold it struggled with the minority delirium class, which reflects the class imbalance.
+**→** The SVM with an RBF kernel was used to learn non-linear decision boundaries between delirium and non-delirium patients.
+**→** We trained it on standardized features to ensure all variables were on a similar scale.
+**→** Its ROC AUC was moderate, and the confusion matrix showed that at the default threshold it struggled with the minority delirium class, which reflects the class imbalance.
 <img width="450" height="737" alt="image" src="https://github.com/user-attachments/assets/c103146d-4c9a-4dc1-b041-462d418e389d" />
 
 🧠 Multi-Layer Perceptron (MLP)
 
-**-->** The MLP was a small neural network with two hidden layers designed to model complex non-linear patterns in the data.
-**-->** It was trained on standardized features with early stopping and regularization to reduce overfitting.
-**-->** This model achieved the highest ROC AUC on the test set, showing the best overall ability to separate delirium and non-delirium patients, even though it is less interpretable than Logistic Regression.
+**→** The MLP was a small neural network with two hidden layers designed to model complex non-linear patterns in the data.
+**→** It was trained on standardized features with early stopping and regularization to reduce overfitting.
+**→** This model achieved the highest ROC AUC on the test set, showing the best overall ability to separate delirium and non-delirium patients, even though it is less interpretable than Logistic Regression.
 <img width="456" height="743" alt="image" src="https://github.com/user-attachments/assets/6e364ba4-d3d5-4e8b-9143-f6801a29518c" />
 
 
@@ -193,9 +193,11 @@ The repository also contains a small patient-level interface built around the tr
 
 5.1 How it works
 
-**-->** Build a template patient using the median value of each feature from the training data.
-**-->** Accept a Python dict of overrides (e.g. Age, Frailty Index, ICU, Hct, Alb, Cre).
-**-->** Construct a one-row DataFrame in the same column order as training.
+**→** Build a template patient using the median value of each feature from the training data.
+
+**→** Accept a Python dict of overrides (e.g. Age, Frailty Index, ICU, Hct, Alb, Cre).
+
+**→** Construct a one-row DataFrame in the same column order as training.
 
 Use the Random Forest to predict:
 
